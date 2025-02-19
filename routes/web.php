@@ -139,6 +139,22 @@ use App\Http\Controllers\PhotoController;
 // Route::resource('photos', PhotoController::class)->only([
 //     'index', 'show'
 // ]);
-Route::resource('photos', PhotoController::class)->except([
-    'create', 'store', 'update', 'destroy'
-]);
+// Route::resource('photos', PhotoController::class)->except([
+//     'create', 'store', 'update', 'destroy'
+// ]);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// VIEW
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Route::get('/greeting', function () {
+//     return view('hello', ['name' => 'Tionusa']);
+// });
+
+// DIRECTORY VIEW
+// Route::get('/greeting', function() {
+//     return view('blog.hello', ['name' => 'Tionusa']);
+// });
+
+// VIEW FROM CONTROLLER
+Route::get('/greeting', [WelcomeController::class, 'greeting']);
+
