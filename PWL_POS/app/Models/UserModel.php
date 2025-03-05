@@ -11,4 +11,10 @@ class UserModel extends Model
 
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
+
+    protected $fillable = ['level_id', 'username', 'nama', 'password'];
+    // mendaftarkan atribut (nama kolom) yang digunakan ketika insert atau update
+
+    // protected $guarded = ['created_at'];
+    // akan mengabaikan kolom yang dimasukkan
 }
