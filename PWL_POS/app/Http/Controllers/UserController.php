@@ -53,8 +53,24 @@ class UserController extends Controller
         // $user = UserModel::findOrFail(1);
 
         // Menghitung jumlah dengan kolom level_id bernilai 2
-        $user = UserModel::where('level_id', 2)->count();
+        // $user = UserModel::where('level_id', 2)->count();
         // dd($user);
+
+        // Mencari data teratas, jika tidak ada akan langsung melakukan insert ke database
+        // $user = UserModel::firstOrCreate([
+        //     'username' => 'manager22',
+        //     'nama' => 'Manager Dua Dua',
+        //     'password' => Hash::make('12345'),
+        //     'level_id' => 2,
+        // ]);
+
+        $user = UserModel::firstOrNew([
+            'username' => 'manager33',
+            'nama' => 'Manager Tiga Tiga',
+            'password' => Hash::make('12345'),
+            'level_id' => 2,
+        ]);
+        $user->save();
 
         // coba akses model userModel
         // $user = UserModel::all();
