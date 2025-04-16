@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LevelModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -38,5 +41,31 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('login');
+    }
+
+    public function register()
+    {
+        if (Auth::check()) return redirect('/');
+        $levels = LevelModel::all();
+        return view('auth.register', compact('levels'));
+    }
+
+    public function postRegister(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'username' => 'required|string|max:100|unique:m_user,username',
+            'password' => 'required|string|min:3',
+            'level_id' => 'required|exists:m_level,level_id'
+        ]);
+
+        UserModel::create([
+            'nama' => $validated['nama'],
+            'username' => $validated['username'],
+            'password' => Hash::make($validated['password']),
+            'level_id' => $validated['level_id'],
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
     }
 }
