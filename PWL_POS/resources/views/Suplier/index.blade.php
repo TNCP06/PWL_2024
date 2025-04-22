@@ -7,8 +7,8 @@
             <div class="card-tools">
                 <button onclick="modalAction('{{ url('/suplier/import') }}')" class="btn btn-info">Import Suplier</button>
                 <a href="{{ url('/suplier/export_excel') }}" class="btn btn-primary">Export Suplier</a>
-                <button onclick="modalAction('{{ url('/suplier/create_ajax') }}')" class="btn btn-success">Tambah Data
-                    (Ajax)</button>
+                <a href="{{ url('/suplier/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file pdf"></i> Export Suplier</a>
+                <button onclick="modalAction('{{ url('/suplier/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
             </div>
         </div>
         <div class="card-body">

@@ -6,9 +6,9 @@
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
                 <button onclick="modalAction('{{ url('/user/import') }}')" class="btn btn-info">Import user</button>
-                <a href="{{ url('/user/export_excel') }}" class="btn btn-primary ">Export Level</a>
-                <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">Tambah Data
-                    (Ajax)</button>
+                <a href="{{ url('/user/export_excel') }}" class="btn btn-primary ">Export user</a>
+                <a href="{{ url('/user/export_pdf') }}" class="btn btn-warning"><i class="fa fa-file pdf"></i> Export user</a>
+                <button onclick="modalAction('{{ url('/user/create_ajax') }}')" class="btn btn-success">Tambah Data (Ajax)</button>
             </div>
         </div>
         <div class="card-body">

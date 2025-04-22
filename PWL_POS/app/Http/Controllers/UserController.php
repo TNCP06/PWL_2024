@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LevelModel;
 use App\Models\UserModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -555,5 +556,20 @@ class UserController extends Controller
 
         $writer->save('php://output');
         exit;
+    }
+
+    public function export_pdf()
+    {
+        $user = UserModel::select('level_id','username','nama','password')
+                    ->orderBy('level_id')
+                    ->orderBy('username')
+                    ->with('level')
+                    ->get();
+        $pdf = PDF::loadview('user.export_pdf', ['user' => $user]);
+        $pdf->setPaper('A4', 'potrait');
+        $pdf->setOption("isRemoteEnabled", true);
+        $pdf->render();
+
+        return $pdf->stream('Data User '.date('Y-m-d H:i:s').'.pdf');
     }
 }
