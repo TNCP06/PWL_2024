@@ -135,5 +135,53 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                @if (Auth::user()->profile_photo)
+                    <img src="{{ Storage::url('profile-photos/' . Auth::user()->profile_photo) }}" class="user-image"
+                        alt="User Image" style="object-fit: cover; width: 25px; height: 25px; border-radius: 50%;">
+                @else
+                    <div class="img-circle mr-2 bg-secondary d-flex align-items-center justify-content-center text-white"
+                        style="object-fit: cover; width: 25px; height: 25px; border-radius: 50%;">
+                        <i class="fas fa-user" style="font-size: 12px;"></i>
+                    </div>
+                @endif
+
+
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+                <!-- User Info Header -->
+                <li class="dropdown-item d-flex align-items-center">
+                    @if (Auth::user()->profile_photo)
+                        <img src="{{ Storage::url('profile-photos/' . Auth::user()->profile_photo) }}"
+                            alt="Profile Photo" class="img-circle mr-2"
+                            style="object-fit: cover; width: 50px; height: 50px;">
+                    @else
+                        <div class="img-circle mr-2 bg-secondary d-flex align-items-center justify-content-center text-white"
+                            style="width: 50px; height: 50px;">
+                            <i class="fas fa-user" style="font-size: 24px;"></i>
+                        </div>
+                    @endif
+                    <span class="font-weight-bold">{{ Auth::user()->nama }}</span>
+                </li>
+
+                <li class="dropdown-divider"></li>
+
+                <!-- Lihat Profil -->
+                <li>
+                    <a href="{{ url('/profile') }}" class="dropdown-item">
+                        <i class="fas fa-user mr-2"></i> Lihat Profil
+                    </a>
+                </li>
+
+                <!-- Logout -->
+                <li>
+                    <a href="/logout" class="dropdown-item text-danger">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </li>
     </ul>
 </nav>

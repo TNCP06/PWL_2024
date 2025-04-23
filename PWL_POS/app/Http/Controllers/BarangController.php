@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yajra\DataTables\Facades\DataTables;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
 class BarangController extends Controller
 {
     public function index()
@@ -292,4 +293,36 @@ confirm(\'Apakah Kita yakit menghapus data ini?\');">Hapus</button></form>';*/
 
         return $pdf->stream('Data Barang '.date('Y-m-d H:i:s').'.pdf');
     }
+
+    // Menampilkan detail Barang
+    public function show(string $id)
+{
+    // Mengambil data barang beserta kategori
+    $Barang = BarangModel::with('kategori')->find($id);
+
+    if (!$Barang) {
+        abort(404); // Jika barang tidak ditemukan
+    }
+
+    // Membuat breadcrumb untuk navigasi
+    $breadcrumb = (object) [
+        'title' => 'Detail Barang',
+        'list' => ['Home', 'Barang', 'Detail']
+    ];
+
+    // Membuat objek halaman dengan judul
+    $page = (object) ['title' => 'Detail Barang'];
+
+    // Menentukan menu aktif
+    $activeMenu = 'Barang';
+
+    // Mengembalikan tampilan dengan data yang diperlukan
+    return view('Barang.show', [
+        'breadcrumb' => $breadcrumb, 
+        'page' => $page, 
+        'barang' => $Barang, 
+        'activeMenu' => $activeMenu
+    ]);
+}
+
 }

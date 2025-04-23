@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
@@ -44,7 +45,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/export_pdf', [UserController::class, 'export_pdf']);
     });
 
-    Route::middleware(['authorize:ADM,MNG,STF,PLNG'])->group(function () {
+    Route::middleware(['authorize:ADM,MNG,STF,CUS,OB,BRST'])->group(function () {
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/', [ProfileController::class, 'index']);
+            Route::post('/update_photo', [ProfileController::class, 'update_photo']);
+        });
+
         Route::prefix('level')->group(function () {
             Route::get('/', [LevelController::class, 'index']);
             Route::get('/list', [LevelController::class, 'list']);
