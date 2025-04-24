@@ -317,7 +317,7 @@ confirm(\'Apakah Kita yakit menghapus data ini?\');">Hapus</button></form>';*/
     $activeMenu = 'Barang';
 
     // Mengembalikan tampilan dengan data yang diperlukan
-    return view('Barang.show', [
+    return view('barang.show', [
         'breadcrumb' => $breadcrumb, 
         'page' => $page, 
         'barang' => $Barang, 
